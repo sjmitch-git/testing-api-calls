@@ -43,3 +43,19 @@ test("renders loading state and then an error message with a 500 status response
     expect(screen.getByText("HTTP error! Status: 500")).toBeInTheDocument();
   });
 });
+
+test("renders loading state and then an error message with a 418 status response", async () => {
+  server.use(
+    rest.get("https://swapi.dev/api/people/1", (req, res, ctx) => {
+      return res(ctx.status(418));
+    })
+  );
+
+  render(<Character />);
+
+  expect(screen.getByText("Loading...")).toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(screen.getByText("HTTP error! Status: 418")).toBeInTheDocument();
+  });
+});
