@@ -13,7 +13,7 @@ export const Character = () => {
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>Error: {error.message}</p>
+        <p>{error.message}</p>
       ) : (
         <h2 data-testid="title">{data?.name}</h2>
       )}

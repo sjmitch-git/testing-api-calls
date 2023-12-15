@@ -27,3 +27,19 @@ test("renders loading state and then the character name", async () => {
     expect(screen.getByTestId("title")).toHaveTextContent("Luke Skywalker");
   });
 });
+
+test("renders loading state and then an error message with a 500 status response", async () => {
+  server.use(
+    rest.get("https://swapi.dev/api/people/1", (req, res, ctx) => {
+      return res(ctx.status(500));
+    })
+  );
+
+  render(<Character />);
+
+  expect(screen.getByText("Loading...")).toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(screen.getByText("HTTP error! Status: 500")).toBeInTheDocument();
+  });
+});
