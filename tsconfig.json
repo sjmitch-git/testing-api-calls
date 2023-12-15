@@ -18,7 +18,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "transform": "@babel/plugin-proposal-private-property-in-object"
+      }
+    ]
   },
   "include": [
     "src"

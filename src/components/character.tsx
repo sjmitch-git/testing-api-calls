@@ -1,3 +1,4 @@
+import React from "react";
 import { useFetch } from "../hooks/use_fetch";
 
 interface CharacterResponse {
@@ -10,11 +11,11 @@ export const Character = () => {
   return (
     <>
       {loading ? (
-        <p>{data?.name}</p>
+        <p>Loading...</p>
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-        <h1>{data?.name}</h1>
+        <h2 data-testid="title">{data?.name}</h2>
       )}
     </>
   );
